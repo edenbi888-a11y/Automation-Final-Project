@@ -1,0 +1,4 @@
+expense_name,amount,date,category,expected_status
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","100","2024-01-01","Fashion","success"
+"","50","2024-01-01","Transportation","failure"
+"   ","300","2024-01-01","Education","failure"
