@@ -98,15 +98,13 @@ class TestChuckNorrisAPI:
         print("\n reformated")
         print(json.dumps(data , indent =2))
         
-        # שימוש במתודה string_contains שכבר הוספנו קודם
+        
         APIVerify.string_contains(url_value, "api.chucknorris.io/jokes/")
 
         
     @allure.description("11. Negative Test: Verify POST is not allowed")
     def test11_post_not_allowed(self, chuck_norris_flows:ChuckNorrisFlows):
         joke_text = "Chuck Norris can divide by zero."
-        
-        # 1. ניסיון לבצע POST
         response = chuck_norris_flows.try_to_create_joke(joke_text)
         APIVerify.status_code(response, 405)
      

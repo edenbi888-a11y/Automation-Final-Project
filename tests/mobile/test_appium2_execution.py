@@ -18,26 +18,25 @@ class TestMobileExpense:
     def test01_verify_execution(self,atid_expense_appium_flows: AtidExpenseAppiumFlows):
         atid_expense_appium_flows.add_expenses("meals", "100", "15", "Food")
         MobileVerifications.visible(self.driver, (By.XPATH, "//*[@text='meals']"))
-        #תשובה המשופרת: "השתמשתי בלוקטור בטסט כי זהו אלמנט שנוצר בזמן ריצה (Runtime) ולא אלמנט סטטי של הדף
-        # , אך דאגתי לרכז את הלוגיקה ב-Flows כדי לשמור על סדר."
-     #"meals", הטקסט "meals" הוא לא חלק קבוע מהאפליקציה (כמו כפתור "שמור"), אלא נתון שאת יצרת הרגע.
-        #מוודא שההוצאה אכן מופיעה במסך לאחר ההוספה.
-       #(assert):האלמנט עם הטקסט "meals" מוצג על המסך
-       # Santiy_ test – בדיקה בסיסית שהמערכת עובדת, שהוספת הוצאה עובדת.
-      
+        
+            # Improved answer: "I used a locator in the test because this is an element created at runtime, not a static page element,
+            # Ensures that the expense actually appears on the screen after being added.
+            # (assert): The element with the text "meals" is displayed on the screen.
+            # Sanity test – a basic check that the system works and that adding an expense functions properly.
+            
     def test02_positive_full_flow(self,atid_expense_appium_flows: AtidExpenseAppiumFlows):
         atid_expense_appium_flows.add_expenses("train ticket", "100", "20", "Transportation")
         MobileVerifications.visible(self.driver, (By.XPATH, "//*[@text='train ticket']"))
-    #מה הוא בדק: זרימה מלאה עם נתונים שונים (ערכי קצה/שונים). הוא מוודא שהמערכת יודעת להתמודד עם קטגוריות שונות (כמו Transportation) ותאריכים שונים.
-    #בדיקה שהטקסט "bus ticket, כאן גם בודקים השדה מקבל כמה מילים  ולא מילה אחת 
-    #מוודא שהטקסט עם שם ההוצאה מופיע (למעשה בקוד יש bus ticket assert
+        #  Full flow with different data (edge/varied values). He verifies that the system can handle different categories (such as Transportation) and different dates.
+        # Validation that the text "bus ticket" is accepted — here we also check that the field supports multiple words, not just a single word.
+        # Ensures that the expense name text appears (in the code, there is a "bus ticket" assert).
 
     def test03_ui_keyboard_interference(self,atid_expense_appium_flows: AtidExpenseAppiumFlows):
         atid_expense_appium_flows.add_expenses("book", "200", "25", "Education")
         MobileVerifications.visible(self.driver, (By.XPATH, "//*[@text='book']"))   
-    #מה הוא בדק: יציבות ממשק משתמש,במובייל, כשמקלדת נפתחת, יכולה  להסתיר כפתורים ה
-    # הוידואי כאן הוא אימות שההוצאה נוספה אם הכפתור  הוספה  היה נסתר אז לא היתה אפשרות להוספה
-     #האלמנט עם שם ההוצאה "tutor" מופיע במסך.assert
+        #  UI stability on mobile — when the keyboard opens, it may hide buttons.
+        # The verification here is to confirm that the expense was added; if the "Add" button was hidden, it wouldn’t have been possible to add it.
+        # The element with the expense name "tutor" appears on the screen. assert
     @allure.title("Test 04 - Expense Persistence")
     @allure.title("Test 04 - Expense Persistence")
     def test04_persistence(self, atid_expense_appium_flows: AtidExpenseAppiumFlows):
@@ -54,20 +53,10 @@ class TestMobileExpense:
         
         # Use your verification
         MobileVerifications.visible(self.driver, expense_locator)
-        
-      #שולח את האפליקציה לרקע (background) ומחזיר אותה לפוקוס
-      #מוודא שהנתונים נשמרו וההוצאה "travel" עדיין מופיעה.
-      #האלמנט "travel" עדיין מוצג במסך.assert
-     # Data Persistence– לוודא שהמערכת שומרת את 
-     # הנתונים גם אם האפליקציה יוצאת מהרקע או שהמשתמש מקבל שיחה וכו’.
+     
     def test05_delete_expense(self, atid_expense_appium_flows: AtidExpenseAppiumFlows):
         expense_name = "Pizza"
-        
-        # 1. הוספה (Flow)
         atid_expense_appium_flows.add_expenses(expense_name, "50", "1", "Food")
         
-        # 2. מחיקה (Flow)
         atid_expense_appium_flows.delete_expense_flow(expense_name)
-        
-        # 3. אימות מחיקה (Verify החדש שלך)
         MobileVerifications.verify_deleted(self.driver, expense_name)
