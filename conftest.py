@@ -63,12 +63,12 @@ def driver_setup(request):
         'appPackage': 'com.atidcollege.atidexpensetracker',
         'appActivity': '.MainActivity',
         'platformName': 'android',
-        'noReset': True  # שומר על מצב האפליקציה בין טסטים
+        'noReset': True  
     }
     driver = webdriver.Remote('http://localhost:4723/wd/hub', dc)
     driver.implicitly_wait(10)
     
-    # מעביר את הדרייבר למחלקת הטסטים
+   
     if request.cls is not None:
         request.cls.driver = driver
     
