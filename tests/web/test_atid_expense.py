@@ -141,7 +141,7 @@ class TestAtidExpenseWeb:
 
 
     @allure.title("test 08 AI Vision - Expense Name Empty Validation")
-    def test_ai_expense_name_empty(self, atid_expense_flows: AtidExpenseFlows):
+    def test08_ai_expense_name_empty(self, atid_expense_flows: AtidExpenseFlows):
 
         with patch.object(atid_expense_flows, "call_gemini", return_value="messgae"):
             

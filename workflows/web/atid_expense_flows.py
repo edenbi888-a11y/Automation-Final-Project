@@ -11,7 +11,7 @@ from google import genai
 from google.genai import types
 from PIL import Image
 import io
-import google.generativeai as genai
+
 
 
 class AtidExpenseFlows:
@@ -20,10 +20,7 @@ class AtidExpenseFlows:
         self.page = page
         self.expense_page = AtidExpensePage(page)
         self.last_alert_text = ""  # משתנה לאחסון הודעת השגיאה האחרונה
-        # self.client = genai.Client(api_key=GEMENI_API_KEY)
-        # Use configure instead of Client for this specific library
-        genai.configure(api_key=GEMENI_API_KEY)
-        self.model = genai.GenerativeModel("gemini-1.5-flash") # Pre-initialize the model
+        self.client = genai.Client(api_key=GEMENI_API_KEY)
         
         
     @allure.step("Add expense")
@@ -318,24 +315,25 @@ class AtidExpenseFlows:
        #CODE FOR CALLING GEMINI API -8
     def call_gemini(self, prompt_text, image_bytes):
         try:
-            genai.configure(api_key=GEMENI_API_KEY)
-            model = genai.GenerativeModel("gemini-2.5-flash")
+            # יצירת הלקוח
+            client = genai.Client(api_key=GEMENI_API_KEY)
 
-            response = model.generate_content([
-                prompt_text,
-                {
-                    "mime_type": "image/jpeg",
-                    "data": image_bytes
-                }
-            ])
+            # קריאה למודל (שימי לב למבנה ה-contents)
+            response = client.models.generate_content(
+                model="gemini-2.0-flash", 
+                contents=[
+                    prompt_text,
+                    {"mime_type": "image/jpeg", "data": image_bytes}
+                ]
+            )
 
-            result = response.text.strip().lower()  # Normalize response for easier comparison
-            print(f"\n Gemini response from AI",result)
+            result = response.text.strip().lower()
+            print(f"\nGemini response from AI: {result}")
             return result
+
         except Exception as e:
             print(f"Gemini failed: {e}")
-            return "false"  # fallback so test doesn't crash
-            
+            return "false"
 
             
 
