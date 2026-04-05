@@ -14,7 +14,7 @@ JOKE_VALUE      =   "value"
 ALL_CATEGORIES = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
  'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
 
-# רשימת קטגוריות צפויות (לאימות)
+
 EXPECTED_CATEGORIES = [
     "animal", "career", "celebrity", "dev", "explicit", "fashion", 
     "food", "history", "money", "movie", "music", "political", 

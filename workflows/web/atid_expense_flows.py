@@ -19,7 +19,7 @@ class AtidExpenseFlows:
     def __init__(self,page:Page):
         self.page = page
         self.expense_page = AtidExpensePage(page)
-        self.last_alert_text = ""  # משתנה לאחסון הודעת השגיאה האחרונה
+        self.last_alert_text = ""  
         self.client = genai.Client(api_key=GEMENI_API_KEY)
         
         
@@ -68,7 +68,7 @@ class AtidExpenseFlows:
 
         UIActions.click(self.expense_page.add_expense_button)
 
-        # ⏱️ תן UI רגע להתעדכן
+       
         self.page.wait_for_timeout(500)
 
         return {
@@ -315,10 +315,10 @@ class AtidExpenseFlows:
        #CODE FOR CALLING GEMINI API -8
     def call_gemini(self, prompt_text, image_bytes):
         try:
-            # יצירת הלקוח
+           
             client = genai.Client(api_key=GEMENI_API_KEY)
 
-            # קריאה למודל (שימי לב למבנה ה-contents)
+            
             response = client.models.generate_content(
                 model="gemini-2.0-flash", 
                 contents=[

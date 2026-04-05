@@ -7,13 +7,13 @@ class MobileVerifications:
     def is_displayed(name, driver):
         locator = (By.XPATH, f"//*[contains(@text, '{name}')]")
         assert driver.find_element(*locator).is_displayed(), f"Element with text {name} was not found!"
-   #is_displayed(name, driver) → בודקת טקסט בלבד
+   
 
     @staticmethod
     def visible(driver, locator):
         assert driver.find_element(*locator).is_displayed(), \
             f"Element {locator} was not found!"   
-    #visible(driver, locator) → בודקת locator ספציפי
+    
     
     @staticmethod
     @allure.step("Verify expense added to table")
@@ -31,9 +31,8 @@ class MobileVerifications:
     @staticmethod
     @allure.step("Verify expense was deleted")
     def verify_deleted(driver, name: str):
-        # שימוש ב-find_elements (ברבים) מחזיר רשימה
+      
         locator = (By.XPATH, f"//*[contains(@text, '{name}')]")
         elements = driver.find_elements(*locator)
-        
-        # אם האורך הוא 0, סימן שזה לא נמצא = הצלחה!
+      
         assert len(elements) == 0, f"Failure: The expense '{name}' still exists in the list."

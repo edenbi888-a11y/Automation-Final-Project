@@ -92,9 +92,9 @@ class WebVerify:
     def verify_alert_text(actual_text: str, expected_text: str, description: str = None):
         """
         Verify that the actual text matches (or contains) the expected text
-        actual_text: הטקסט שנלקח מה-alert/dialog
-        expected_text: הטקסט הצפוי
-        description: תיאור בדיקה ל-Allure, ברירת מחדל = הטקסט הצפוי
+        actual_text: alert/dialog
+        expected_text: 
+        description: 
         """
         if description is None:
             description = f"Verify alert text contains: '{expected_text}'"
@@ -167,12 +167,12 @@ class WebVerify:
     @allure.step("Verify expense name is deleted from the list")
     def expense_deleted(page, name: str):
         
-        # זה מייצג את האלמנט שאנחנו מצפים שייעלם
+      
         expense_row = page.locator(f"//li[contains(., '{name}')]")
         
-        # עכשיו זה קריא יותר: "צפה ששורת ההוצאה תהיה בספירה 0"
+        
         expect(expense_row).to_have_count(0)
-        #to_have_count(0). זה הרבה יותר יציב מלחפש את האלמנט ולבדוק אם הוא קיים, כי Playwright
+       
 
     @staticmethod
     def verify_expense_ddt_result(result: dict, data: dict):

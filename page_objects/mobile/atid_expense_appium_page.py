@@ -6,7 +6,7 @@ class AtidExpensAppiumePage:
     def __init__(self, driver):
         self.driver = driver  
         
-        # לוקטורים
+       
         self.name_field = (By.XPATH, "//*[@resource-id='expense-name']") 
         self.amount_field = (By.XPATH, "//*[@resource-id='expense-amount']")
         self.date_field = (By.XPATH, "//*[@resource-id='expense-date']")

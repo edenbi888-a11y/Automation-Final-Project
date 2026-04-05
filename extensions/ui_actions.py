@@ -59,8 +59,8 @@ class UIActions:
 
     @staticmethod
     @allure.step("Select option '{option_value}' from dropdown")
-    def select_option(page: Page, locator: Locator, option_value: str): # שינוי שם ל-option_value
-        # ב-Playwright, כשמשתמשים ב-page.select_option, צריך להעביר את הסלקטור (string) או הלוקטור
+    def select_option(page: Page, locator: Locator, option_value: str): 
+       
         page.select_option(locator, value=option_value)
 
     # @staticmethod
@@ -73,13 +73,13 @@ class UIActions:
     @staticmethod
     @allure.step("Update text in element to: '{value}'")
     def update_text(element: Locator, value: str, timeout: int = DEFAULT_TIMEOUT) -> None:
-        # 1. קודם מחכים שהאלמנט יהיה גלוי (ההגנה שלך)
+       #wait for element to be visible before interacting
         element.wait_for(state="visible", timeout=timeout)
         
-        # 2. מנקים את השדה (כדי שלא יתווסף טקסט על טקסט קיים)
+    
         element.fill("")
         
-        # 3. מזינים את הערך החדש
+       
         element.fill(value)
 
     @staticmethod
@@ -120,8 +120,7 @@ class UIActions:
     def select_option(element: Locator, option_value: str):
         element.select_option(label=option_value)
         
-    # extensions/ui_actions.py
-    # א פונקציה ספציפית למחיקה עם לוג משלה:
+   
     @staticmethod
     @allure.step("Performing delete action on element")
     def click_delete(element):

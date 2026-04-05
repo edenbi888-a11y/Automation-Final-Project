@@ -9,7 +9,7 @@ class MobileActions:
     @allure.step("Mobile: Update text in element to: '{value}'")
     def update_text(driver, locator, value: str) -> None:
         wait = WebDriverWait(driver, 10)
-        # שימוש בכוכבית כדי לפרק את ה-tuple של (By.XPATH, "...")
+    
         el = wait.until(EC.visibility_of_element_located(locator))
         el.clear()
         el.send_keys(value)
