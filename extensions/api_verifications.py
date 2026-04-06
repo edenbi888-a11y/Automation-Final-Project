@@ -74,33 +74,33 @@ class APIVerify:
         
     @staticmethod
     def list_contains_all(actual_list: list, expected_list: list):
-        """ וולידציה שכל האיברים ברשימה המצופה קיימים ברשימה שחזרה """
+      
         for item in expected_list:
             assert item in actual_list, f"Item '{item}' was expected but not found in the response list."
       #test 07 the url have to strings e.g "https:"
     @staticmethod
     def string_contains(actual_string: str, expected_substring: str):
-        """ וולידציה שסטרינג מכיל תת-סטרינג (מתאים ל-Headers ו-URLs) """
+       
         assert expected_substring in actual_string, \
             f"Expected '{expected_substring}' to be in '{actual_string}'"
 
     @staticmethod
     def instance_of(value, expected_type):
-        """ וולידציה שסוג הנתון תקין (למשל שה-ID הוא מחרוזת) """
+        
         assert isinstance(value, expected_type), \
             f"Expected type {expected_type}, but got {type(value)}"
         
         #for test 09 performance
     @staticmethod
     def is_less_than(actual_value: float, threshold: float, unit: str = "s"):
-        """ וולידציה שהערך קטן מסף מסוים (מתאים לזמן תגובה) """
+      
         assert actual_value < threshold, \
             f"Value too high: {actual_value}{unit} (Limit: {threshold}{unit})"   
         #test 11
     @staticmethod
     def verify_error_status(response, expected_error_code: int):
         """
-        מוודא שהשרת אכן מחזיר שגיאה כשמנסים לבצע פעולה אסורה
+       
         """
         assert response.status == expected_error_code, \
             f"Expected error {expected_error_code}, but got {response.status}. Server might be vulnerable!"   

@@ -26,7 +26,7 @@ class TestChuckNorrisAPI:
 
 
     @allure.description("test03. Data Driven Search: Verify results for multiple queries")
-    @pytest.mark.parametrize("query, should_have_results", SEARCH_QUERIES) # כאן הטסט נהיה עוצמתי
+    @pytest.mark.parametrize("query, should_have_results", SEARCH_QUERIES) 
     def test03_search_jokes_dynamic(self, chuck_norris_flows:ChuckNorrisFlows, query,should_have_results):
         response = chuck_norris_flows.search_joke(query)
         data = response.json()

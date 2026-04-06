@@ -12,7 +12,7 @@ class DBActions:
         self.data_base.close()
 
     def get_atidexpenses(self):
-        """שליפת כל הרשומות מהטבלה"""
+       
         query = "SELECT * FROM atidexpenses"
         my_cursor = self.data_base.cursor()
         my_cursor.execute(query)
@@ -29,14 +29,14 @@ class DBActions:
         return result[0] if result else 0
 
     def get_table_columns(self, table_name):
-        """שליפת שמות העמודות של טבלה"""
+      
         cursor = self.data_base.cursor()
         cursor.execute(f"PRAGMA table_info({table_name})")
       
         return [row[1] for row in cursor.fetchall()]
     
     def get_expense_by_name(self, name):
-        """שליפת הוצאה לפי שם"""
+     
         query = "SELECT * FROM atidexpenses WHERE \"expense name\" = ?"
         cursor = self.data_base.cursor()
         cursor.execute(query, (name,))

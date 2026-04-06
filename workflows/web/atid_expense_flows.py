@@ -349,33 +349,7 @@ class AtidExpenseFlows:
         UIActions.navigate_to(self.page,url)
 
 
-    # @allure.step("verifing long term name ,empty field and space")
-    # def verify_long_expense_ddt(self, expense_data):
-    #     """
-    #     ממלא את טופס ההוצאות ומחזיר את טקסט ה-Alert.
-    #     """
-    #     # 1. איפוס ה-Alert הקודם
-    #     self.last_alert_text = ""
-
-    #     # 2. הזנת שם ההוצאה והסכום
-    #     self.expense_page.expense_name_field.fill(expense_data['expense_name'])
-    #     self.expense_page.amount_field.fill(str(expense_data['amount']))
-
-    #     # 3. בחירת תאריך
-    #     self.select_option_date(expense_data['date'])
-
-    #     # 4. בחירת קטגוריה (פקודה ישירה ל-Dropdown)
-    #     # וודאי שב-CSV הערכים הם: Food, Fashion, Entertainment, Transportation
-    #     self.expense_page.category_selector.select_option(label=expense_data['category'])
-
-    #     # 5. הגדרת המאזין ל-Alert
-    #     self.page.once("dialog", lambda dialog: self._store_alert(dialog))
-
-    #     # 6. לחיצה על הוספה
-    #     self.click_add_expense_btn()
-
-    #     # 7. המתנה קלה לסנכרון הדיאלוג
-    #     self.page.wait_for_timeout(500)
+    
 
 
     
