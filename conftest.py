@@ -25,6 +25,7 @@ def page(playwright: Playwright, request:FixtureRequest):
     context = browser.new_context(no_viewport=True)   
     context.tracing.start(screenshots=True, snapshots=True, sources=True) # Start tracing for this context.     
     page = context.new_page()
+    page.on("console", handle_console_message)
     page.goto(EXPENSE_URL)
     yield page    
     # Best practice: Close page before context
@@ -86,43 +87,44 @@ def atid_expense_flows(page: Page):
     return AtidExpenseFlows(page)
 
 
-#Listen to console messages
+# #Listen to console messages
 def handle_console_message(msg):
     if msg.type == "error":
         print(f"Error detected in console: {msg.text}")
     if "the server responded with a status of 404" in msg.text:
         raise AssertionError(f"Test Failed: 404 Error Detected in Console - {msg.text}")
 
-
-        
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
 
     if rep.when == "call" and rep.failed:
-
         page: Page = item.funcargs.get("page")
 
         if page:
-            # Screenshot
+          
             allure.attach(
                 page.screenshot(full_page=True),
                 name="web_screenshot_on_failure",
                 attachment_type=allure.attachment_type.PNG
             )
 
-            #  TRACE
+           
             trace_path = f"trace_{item.name}.zip"
-
-            page.context.tracing.stop(path=trace_path)
-
-            allure.attach.file(
-                trace_path,
-                name=f"Trace: {item.name}",
-                attachment_type=allure.attachment_type.ZIP
-            )
-
+            
+            try:
+                
+                page.context.tracing.stop(path=trace_path)
+                
+                allure.attach.file(
+                    trace_path,
+                    name=f"Trace: {item.name}",
+                    attachment_type=allure.attachment_type.ZIP
+                )
+            except Exception:
+               
+                pass
         # Mobile (Appium)
         driver = item.funcargs.get("driver_setup")
         if driver:
